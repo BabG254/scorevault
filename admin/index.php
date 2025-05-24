@@ -1,5 +1,6 @@
 <?php
 require_once('../config.php');
+require_once('../includes/header.php');
 
 $message = '';
 
@@ -51,3 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
+
+<?php
+require_once('../includes/header.php');

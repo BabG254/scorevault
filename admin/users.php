@@ -1,5 +1,6 @@
 <?php
 require_once('../config.php');
+require_once('../includes/header.php');
 
 $message = '';
 
@@ -94,3 +95,6 @@ $users = $conn->query("SELECT * FROM users ORDER BY name");
     </div>
 </body>
 </html>
+
+<?php
+require_once('../includes/header.php');
