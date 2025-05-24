@@ -40,15 +40,15 @@ function getActivePage() {
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link <?php echo getActivePage() == 'scoreboard' ? 'active' : ''; ?>" 
-                           href="/ScoreVault/scoreboard/">Scoreboard</a>
+                           href="scoreboard/index.php">Scoreboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo getActivePage() == 'judge' ? 'active' : ''; ?>" 
-                           href="/ScoreVault/judge/">Judge Portal</a>
+                           href="judge/index.php">Judge Portal</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo getActivePage() == 'admin' ? 'active' : ''; ?>" 
-                           href="/ScoreVault/admin/">Admin</a>
+                           href="admin/index.php">Admin</a>
                     </li>
                 </ul>
             </div>
