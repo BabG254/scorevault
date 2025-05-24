@@ -1,18 +1,12 @@
 <?php
 require_once('../config.php');
-require_once('../includes/header.php');
 
 $message = '';
-
-// Fetch all users
 $users_query = "SELECT * FROM users ORDER BY name";
 $users_result = $conn->query($users_query);
-
-// Fetch all judges
 $judges_query = "SELECT * FROM judges ORDER BY name";
 $judges_result = $conn->query($judges_query);
 
-// Handle score submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
     $judge_id = filter_input(INPUT_POST, 'judge_id', FILTER_VALIDATE_INT);
@@ -50,30 +44,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judge Portal</title>
+    <title>Judge Portal - ScoreVault</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .judge-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .nav-link {
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Judge Portal</h2>
-        
+    <div class="judge-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">Judge Portal</h1>
+                <nav>
+                    <a href="/ScoreVault/" class="nav-link">Home</a>
+                    <a href="/ScoreVault/scoreboard/" class="nav-link">Scoreboard</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <?php if ($message): ?>
-            <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+            <div class="alert alert-info animate__animated animate__fadeIn"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>Submit Score</h4>
-            </div>
-            <div class="card-body">
-                <form method="POST" class="mb-4" id="scoreForm">
-                    <div class="mb-3">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body p-4">
+                <h2 class="card-title mb-4">Submit Score</h2>
+                <form method="POST" id="scoreForm">
+                    <div class="mb-4">
                         <label for="judge_id" class="form-label">Select Judge</label>
                         <select class="form-select" id="judge_id" name="judge_id" required>
                             <option value="">Choose a judge...</option>
@@ -85,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </select>
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="user_id" class="form-label">Select Participant</label>
                         <select class="form-select" id="user_id" name="user_id" required>
                             <option value="">Choose a participant...</option>
@@ -97,19 +153,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </select>
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="score" class="form-label">Score (1-100)</label>
                         <input type="number" class="form-control" id="score" name="score"
                                min="1" max="100" required>
                         <div class="form-text">Enter a score between 1 and 100</div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Submit Score</button>
+                    <button type="submit" class="btn btn-primary w-100">Submit Score</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.getElementById('scoreForm').addEventListener('submit', function(e) {
         const score = parseInt(document.getElementById('score').value);
