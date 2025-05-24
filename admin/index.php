@@ -71,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="mb-0">Admin Panel</h1>
+                <a href="index.php" class="btn btn-outline-light">Home</a>
+                <a href="scoreboard/index.php" class="btn btn-outline-light">Scoreboard</a>
+                <a href="judge/index.php" class="btn btn-outline-light">Judge Portal</a>
                 <a href="users.php" class="btn btn-outline-light">User Management</a>
             </div>
         </div>
@@ -102,5 +105,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<?php
-require_once('../includes/header.php');

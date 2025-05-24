@@ -113,8 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="mb-0">Judge Portal</h1>
                 <nav>
-                    <a href="/ScoreVault/" class="nav-link">Home</a>
-                    <a href="/ScoreVault/scoreboard/" class="nav-link">Scoreboard</a>
+                    <a href="index.php" class="nav-link">Home</a>
+                    <a href="judge/index.php" class="nav-link">Scoreboard</a>
                 </nav>
             </div>
         </div>

@@ -72,8 +72,8 @@ require_once('../config.php');
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="mb-0">Live Scoreboard</h1>
                 <nav>
-                    <a href="/ScoreVault/" class="nav-link">Home</a>
-                    <a href="/ScoreVault/judge/" class="nav-link">Judge Portal</a>
+                    <a href="index.php" class="nav-link">Home</a>
+                    <a href="judge/index.php" class="nav-link">Judge Portal</a>
                 </nav>
             </div>
         </div>

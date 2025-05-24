@@ -1,6 +1,5 @@
 <?php
 require_once('../config.php');
-require_once('../includes/header.php');
 
 $message = '';
 
@@ -32,25 +31,84 @@ $users = $conn->query("SELECT * FROM users ORDER BY name");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>User Management - ScoreVault</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            padding-top: 2rem;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .alert {
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>User Management</h2>
-            <a href="index.php" class="btn btn-outline-primary">Judge Management</a>
+            <h2 class="text-primary">User Management</h2>
+            <div>
+                <a href="scoreboard/index.php" class="btn btn-outline-primary me-2">Scoreboard</a>
+                <a href="judge/index.php" class="btn btn-outline-primary">Judge Management</a>
+            </div>
         </div>
 
         <?php if ($message): ?>
-            <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+            <div class="alert alert-info animate__animated animate__fadeIn"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>
 
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <h4>Add New User</h4>
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Add New User</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST">
@@ -66,8 +124,8 @@ $users = $conn->query("SELECT * FROM users ORDER BY name");
 
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Existing Users</h4>
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Existing Users</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -93,8 +151,7 @@ $users = $conn->query("SELECT * FROM users ORDER BY name");
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-<?php
-require_once('../includes/header.php');
