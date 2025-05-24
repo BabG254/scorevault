@@ -1,4 +1,4 @@
-# LAMP Scoreboard – Software Engineering Internship Task
+# ScoreVault – "A vault for scoring brilliance."
 
 A lightweight web app built on the LAMP stack to manage judges, allow scoring of participants, and display a dynamic public scoreboard.
 
