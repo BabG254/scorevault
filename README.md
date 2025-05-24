@@ -47,7 +47,8 @@ Follow the steps below to set up the ScoreVault project locally using **XAMPP**.
 
    ```bash
    git clone https://github.com/BabG254/scorevault.git
-### Move to XAMPP Directory
+   ---
+## Move to XAMPP Directory
 
 Move the project folder into your htdocs directory:
 
@@ -55,10 +56,13 @@ bash
 Copy
 Edit
 mv scorevault /path-to-xampp/htdocs/
+
+---
 ### Start Apache & MySQL
 
 Launch XAMPP Control Panel and start both Apache and MySQL.
 
+---
 ### Create the Database
 
 Go to http://localhost/phpmyadmin
@@ -75,6 +79,7 @@ Select the schema.sql file located in the root of the project folder
 
 Click Go
 
+---
 ### Configure Database Credentials
 
 Open scorevault/config.php and update the values as follows:
@@ -94,6 +99,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ?>
+
+---
 ### Access the App
 
 Admin Panel: http://localhost/scorevault/admin/
@@ -102,6 +109,7 @@ Judge Portal: http://localhost/scorevault/judge/
 
 Public Scoreboard: http://localhost/scorevault/scoreboard/
 
+---
 ##🔐 Assumptions
 Users are pre-registered (hardcoded or inserted via SQL).
 
@@ -109,12 +117,14 @@ No authentication is implemented due to scope constraints.
 
 Score updates are allowed by judges.
 
+---
 ##💡 If I Had More Time...
 Implement secure login/auth for both Admins and Judges.
 
 Security: Add basic .htaccess auth for admin/judge directories.
 
 Data Validation: Consider server-side sanitation for edge cases.
+---
 
 Mobile UI: Fine-tune Bootstrap responsiveness for smaller screens.
 
