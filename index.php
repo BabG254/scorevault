@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Scoreboard</h5>
                         <p class="card-text">View real-time competition scores and rankings</p>
-                        <a href="/ScoreVault/scoreboard/" class="btn btn-primary">View Scores</a>
+                        <a href="scoreboard/index.php" class="btn btn-primary">View Scores</a>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Judge Portal</h5>
                         <p class="card-text">Submit and manage participant scores</p>
-                        <a href="/ScoreVault/judge/" class="btn btn-primary">Judge Portal</a>
+                        <a href="judge/index.php" class="btn btn-primary">Judge Portal</a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Administration</h5>
                         <p class="card-text">Manage judges and participants</p>
-                        <a href="/ScoreVault/admin/" class="btn btn-primary">Admin Panel</a>
+                        <a href="admin/index.php" class="btn btn-primary">Admin Panel</a>
                     </div>
                 </div>
             </div>
