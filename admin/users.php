@@ -95,8 +95,9 @@ $users = $conn->query("SELECT * FROM users ORDER BY name");
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-primary">User Management</h2>
             <div>
-                <a href="scoreboard/index.php" class="btn btn-outline-primary me-2">Scoreboard</a>
-                <a href="judge/index.php" class="btn btn-outline-primary">Judge Management</a>
+                <a href="../scoreboard/index.php" class="btn btn-outline-primary me-2">Scoreboard</a>
+                <a href="../judge/index.php" class="btn btn-outline-primary">Judge Management</a>
+                <a href="../admin/index.php" class="btn btn-outline-primary">Admin Home</a>
             </div>
         </div>
 

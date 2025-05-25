@@ -7,6 +7,24 @@ $users_result = $conn->query($users_query);
 $judges_query = "SELECT * FROM judges ORDER BY name";
 $judges_result = $conn->query($judges_query);
 
+// Get all scores with user and judge names
+$scores_query = "SELECT s.*, u.name as user_name, j.name as judge_name 
+                FROM scores s 
+                JOIN users u ON s.user_id = u.id 
+                JOIN judges j ON s.judge_id = j.id 
+                ORDER BY s.timestamp DESC";
+$scores_result = $conn->query($scores_query);
+
+// Store results for reuse
+$users = [];
+$judges = [];
+while ($user = $users_result->fetch_assoc()) {
+    $users[] = $user;
+}
+while ($judge = $judges_result->fetch_assoc()) {
+    $judges[] = $judge;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
     $judge_id = filter_input(INPUT_POST, 'judge_id', FILTER_VALIDATE_INT);
@@ -113,8 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="mb-0">Judge Portal</h1>
                 <nav>
-                    <a href="index.php" class="nav-link">Home</a>
-                    <a href="judge/index.php" class="nav-link">Scoreboard</a>
+                    <a href="../index.php" class="nav-link">Home</a>
+                    <a href="../scoreboard/index.php" class="nav-link">Scoreboard</a>
                 </nav>
             </div>
         </div>
@@ -162,6 +180,106 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     <button type="submit" class="btn btn-primary w-100">Submit Score</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container data-section">
+        <div class="row">
+            <!-- Judges List -->
+            <div class="col-md-4">
+                <div class="card data-card animate__animated animate__fadeInLeft">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Active Judges</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($judges as $judge): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($judge['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($judge['name']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users List -->
+            <div class="col-md-4">
+                <div class="card data-card animate__animated animate__fadeInUp">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Participants</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($users as $user): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($user['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Scores -->
+            <div class="col-md-4">
+                <div class="card data-card animate__animated animate__fadeInRight">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Recent Scores</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Participant</th>
+                                        <th>Judge</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($score = $scores_result->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($score['user_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($score['judge_name']); ?></td>
+                                            <td>
+                                                <span class="score-badge">
+                                                    <?php echo htmlspecialchars($score['score']); ?>
+                                                </span>
+                                                <div class="timestamp">
+                                                    <?php echo date('M d, Y H:i', strtotime($score['timestamp'])); ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
